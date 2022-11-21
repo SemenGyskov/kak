@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{data|length}} результатов поиска
+{% endblock %}
+
+
+{% block content %}
+<form action="{% url 'search' %}" class="search-form">
+    <input type="text" placeholder="Введите слово..." class="search-form__input" name="q" value="{{query}}" required>
+    <button type="submit" class="search-form__button">Найти</button>
+</form>
+<div class="results">
+    <h2 class="results__title">
+        {% if data|length > 0 %}
+        {{data|length}} результатов поиска:
+        {% else %}
+        0 результатов поиска
+        {% endif %}
+    </h2>
+    <div class="results__items">
+        {% for item in data %}
+        <p class="results__item">{{item}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
